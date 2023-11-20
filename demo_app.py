@@ -77,8 +77,19 @@ if __name__ == '__main__':
     args = parse_args()
 
     st.title('Flower Hopper')
-    flower_A = st.text_input('Input Flower A:', '').strip().lower()
-    flower_B = st.text_input('Input Flower B:', '').strip().lower()
+    flower_species = read_flower_species_list(args.flower_species_list)
+    flower_A = st.selectbox(
+        'Flower A:',
+        flower_species,
+        index=None,
+        placeholder="Select one flower...",
+    )
+    flower_B = st.selectbox(
+        'Flower B:',
+        flower_species,
+        index=None,
+        placeholder="Select one flower...",
+    )
     if flower_A and flower_B and st.button(label='Find Hops'):
         path = find_hops(
             start=flower_A,
